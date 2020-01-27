@@ -1,9 +1,10 @@
 
 #include <stdio.h>
+#include <stdlib.h>
 
-main() {
+int main() {
 
-FILE *fp = fopen("main.c", "r");
+FILE *fp = fopen("mainn.c", "r");
 if (fp == NULL) {
     printf("wcat: cannot open file\n");
     exit(1);
