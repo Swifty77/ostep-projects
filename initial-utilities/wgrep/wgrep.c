@@ -1,3 +1,5 @@
+#define _GNU_SOURCE
+#define _XOPEN_SOURCE 700
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -12,7 +14,10 @@ FILE *fp;
         exit(1);
     }
     
-    for (int i = 0; i < argc; i++){
+    ssize_t r;
+    size_t t = 0;
+    
+    for (int i = 2; i < argc; i++){
         fp = fopen(argv[i], "r");
         
         if (fp == NULL) {
@@ -20,17 +25,13 @@ FILE *fp;
             exit(1);
         }
         
-        while 
+        while ((r = getLine(&line, &t, fp)) != -1){
+            if(strstr(line, argv[1]) != NULL){
+                printf("%s", line);
+            }
+        }
+        fclose(fp);
     }
-    
-    
-    
-//    = fopen(argv[], "r");
-    
-
-    
-    
-    
-    
+  
     return 0;
 }
