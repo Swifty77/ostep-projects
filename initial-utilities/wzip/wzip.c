@@ -35,7 +35,7 @@ int main (int argc, char **argv) {
             lastCar = car;
         }
         
-        if (i == argc - 1) {
+        if (i == argc-1) {
             fwrite(&totalCars, byteSize, memb, stdout);
             fwrite(&lastCar, memb, memb, stdout);
             totalCars = 1;
