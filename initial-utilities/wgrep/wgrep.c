@@ -8,7 +8,7 @@
 
 int main(int argc, char **argv) {
     
-char line [1000];
+char line [1000]; //stores positive line matches
 FILE *fp;
     
     if (argc < 2) {
@@ -16,20 +16,22 @@ FILE *fp;
         exit(1);
     }
     
-    ssize_t r;
-    size_t n = 0;
+    ssize_t r;    //size of blocks
+    size_t n = 0; // line size
     
     for (int i = 2; i < argc; i++){
-        fp = fopen(argv[i], "r");
+        fp = fopen(argv[i], "r"); //open file
         
         if (fp == NULL) {
             printf("wgrep: cannot open file");
             exit(1);
         }
         
+        //read the line
         while ((r = getLine(&line, &n, fp)) != -1){
+            // check if it contains search term
             if(strstr(line, argv[1]) != NULL){
-                printf("%s", line);
+                printf("%s", line); //prints line with search term
             }
         }
         fclose(fp);

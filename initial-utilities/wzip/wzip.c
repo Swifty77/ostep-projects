@@ -8,10 +8,10 @@ int main (int argc, char **argv) {
         exit(1);
     }
     
-    int totalCars;
-    char car, lastCar = '\0';
-    size_t byteSize = 4;
-    size_t memb = 1;
+    int totalCars;            // counts repeated characters
+    char car, lastCar = '\0'; // current and last characters
+    size_t byteSize = 4;      // # of bytes to be written by fwrite
+    size_t memb = 1;          // # of times record is written
     for (int i = 1; i< argc; i++){
         FILE *fp = fopen(argv[i], "r");
         if (fp == NULL) {
@@ -28,13 +28,13 @@ int main (int argc, char **argv) {
                 totalCars++;
             }
             else {
-                fwrite(&totalCars, byteSize, memb, stdout);
-                fwrite(&lastCar, memb, memb, stdout);
+                fwrite(&totalCars, byteSize, memb, stdout); //print number
+                fwrite(&lastCar, memb, memb, stdout);       //print character
                 totalCars = 1;
             }
             lastCar = car;
         }
-        
+        //prints last set once it goes through all of the files
         if (i == argc-1) {
             fwrite(&totalCars, byteSize, memb, stdout);
             fwrite(&lastCar, memb, memb, stdout);
